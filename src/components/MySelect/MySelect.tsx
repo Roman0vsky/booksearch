@@ -6,5 +6,5 @@ type MySelectProps = {
 };
 
 export default function MySelect({ children }: MySelectProps) {
-  return <select>{children}</select>;
+  return <select className="MySelect">{children}</select>;
 }

@@ -5,11 +5,11 @@ import "./Header.css";
 
 export default function Header() {
   return (
-    <div>
-      <h1>Search for books</h1>
+    <div className="Header">
+      <span className="Header__title">Search for books</span>
       <MyInput placeholder="Search..." />
       <div className="container">
-        <span>Categories</span>
+        <span className="Header__text">Categories</span>
         <MySelect>
           <option value="all">all</option>
           <option value="art">art</option>
@@ -19,7 +19,7 @@ export default function Header() {
           <option value="medical">medical</option>
           <option value="poetry">poetry</option>
         </MySelect>
-        <span>Sorting by</span>
+        <span className="Header__text">Sorting by</span>
         <MySelect>
           <option value="relevance">relevance</option>
           <option value="newest">newest</option>
