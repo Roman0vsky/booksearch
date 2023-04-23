@@ -13,7 +13,7 @@ export default function Book(props: BookProps) {
     <li className="Book">
       <img src={props.bookImg} alt={`IMG: ${props.bookTitle}`} />
       <span>{props.bookCategories?.join(", ")}</span>
-      <span>{props.bookTitle}</span>
+      <span className="Book__Title">{props.bookTitle}</span>
       <span>{props.bookAuthors?.join(", ")}</span>
     </li>
   );

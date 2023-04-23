@@ -6,7 +6,11 @@
   border-radius: 0 5px 5px 0;
   background: rgb(212, 212, 212);
 }
-
 .MyButton:hover {
   background: rgb(186, 186, 186);
+}
+@media screen and (max-width: 539px) {
+  .MyButton {
+    border-radius: 5px;
+  }
 }

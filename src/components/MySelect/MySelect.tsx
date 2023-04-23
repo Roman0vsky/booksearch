@@ -1,10 +1,19 @@
 import React from "react";
 import "./MySelect.css";
 
+type Option = {
+  value: string;
+};
 type MySelectProps = {
-  children: React.ReactNode;
+  options: Array<Option>;
 };
 
-export default function MySelect({ children }: MySelectProps) {
-  return <select className="MySelect">{children}</select>;
+export default function MySelect(props: MySelectProps) {
+  return (
+    <select className="MySelect">
+      {props.options.map((option) => (
+        <option value={option.value}>{option.value}</option>
+      ))}
+    </select>
+  );
 }

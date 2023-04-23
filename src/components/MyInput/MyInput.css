@@ -6,3 +6,9 @@
   border: none;
   border-radius: 5px 0 0 5px;
 }
+@media screen and (max-width: 539px) {
+  .MyInput {
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+}
