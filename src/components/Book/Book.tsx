@@ -2,6 +2,7 @@ import React from "react";
 import "./Book.css";
 
 type BookProps = {
+  id: string;
   bookImg: string;
   bookCategories: Array<string>;
   bookTitle: string;

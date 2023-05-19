@@ -21,6 +21,7 @@ export default function Content(props: ContentProps) {
           props.books.map((book) => (
             <Book
               key={book.id}
+              id={book.id}
               bookImg={book.volumeInfo.imageLinks?.thumbnail}
               bookCategories={book.volumeInfo?.categories}
               bookTitle={book.volumeInfo?.title}

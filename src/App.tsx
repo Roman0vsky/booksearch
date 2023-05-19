@@ -21,6 +21,7 @@ function App() {
   const [book, setBook] = useState("");
   const [totalItems, setTotalItems] = useState(0);
   const [isLoading, setLoading] = useState(false);
+  const [sortingBy, setSortingBy] = useState("relevance")
 
   function handleSearch(book: string) {
     if (book === "") {
@@ -29,14 +30,21 @@ function App() {
     setLoading(true);
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${book}&key=${key}&maxResults=30`
+        `https://www.googleapis.com/books/v1/volumes?q=${book}&key=${key}&maxResults=30&orderBy=${sortingBy}`
       )
       .then((data) => {
-        // console.log(data.data);
-        setBook(book);
-        setTotalItems(+data.data.totalItems);
-        setBooks(data.data.items);
-        setLoading(false);
+        console.log(data);
+        if (+data.data.totalItems) {
+          setBook(book);
+          setTotalItems(+data.data.totalItems);
+          setBooks(data.data.items);
+          setLoading(false);
+        } else {
+          setBook(book);
+          setTotalItems(+data.data.totalItems);
+          setBooks([]);
+          setLoading(false);
+        }
       });
   }
 
@@ -44,20 +52,28 @@ function App() {
     setLoading(true);
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${book}&key=${key}&maxResults=30&startIndex=${+books.length}`
+        `https://www.googleapis.com/books/v1/volumes?q=${book}&key=${key}&maxResults=30&startIndex=${+books.length}&orderBy=${sortingBy}`
       )
       .then((data) => {
-        // console.log(data.data);
         setBooks(books.concat(data.data.items));
         setLoading(false);
       });
   }
 
+  function sortBy(sort: string) {
+    setSortingBy(sort);
+  }
+
   return (
     <div className="App">
-      <Header handleSearch={handleSearch} />
+      <Header handleSearch={handleSearch} sortBy={sortBy} />
       <h1>Total items - {totalItems}</h1>
-      <Content books={books} isLoading={isLoading} totalItems={totalItems} loadMore={loadMore}/>
+      <Content
+        books={books}
+        isLoading={isLoading}
+        totalItems={totalItems}
+        loadMore={loadMore}
+      />
     </div>
   );
 }
