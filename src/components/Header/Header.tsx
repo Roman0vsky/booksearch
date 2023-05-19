@@ -4,6 +4,7 @@ import MyButton from "../MyButton/MyButton";
 import MyInput from "../MyInput/MyInput";
 import MySelect from "../MySelect/MySelect";
 import "./Header.css";
+import { optionsCategories, optionsSorting } from "./options";
 
 type HeaderProps = {
   handleSearch: (book: string) => void;
@@ -34,21 +35,11 @@ export default function Header(props: HeaderProps) {
       <div className="container">
         <div className="container__inner">
           <span className="Header__text">Categories</span>
-          <MySelect
-            options={[
-              { value: "all" },
-              { value: "art" },
-              { value: "biography" },
-              { value: "computers" },
-              { value: "history" },
-              { value: "medical" },
-              { value: "poetry" },
-            ]}
-          />
+          <MySelect options={optionsCategories} />
         </div>
         <div className="container__inner">
           <span className="Header__text">Sorting by</span>
-          <MySelect options={[{ value: "relevance" }, { value: "newest" }]} />
+          <MySelect options={optionsSorting} />
         </div>
       </div>
     </div>
