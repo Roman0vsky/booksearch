@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Content from "./components/Content/Content";
 import Header from "./components/Header/Header";
@@ -34,6 +34,8 @@ function App() {
         `https://www.googleapis.com/books/v1/volumes?q=${book}${category}&key=${key}&maxResults=30&orderBy=${sortingBy}`
       )
       .then((data) => {
+        console.log(data);
+
         if (+data.data.totalItems) {
           setBook(book);
           setTotalItems(+data.data.totalItems);
