@@ -21,7 +21,8 @@ function App() {
   const [book, setBook] = useState("");
   const [totalItems, setTotalItems] = useState(0);
   const [isLoading, setLoading] = useState(false);
-  const [sortingBy, setSortingBy] = useState("relevance")
+  const [sortingBy, setSortingBy] = useState("relevance");
+  const [category, setCategory] = useState("");
 
   function handleSearch(book: string) {
     if (book === "") {
@@ -30,10 +31,9 @@ function App() {
     setLoading(true);
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${book}&key=${key}&maxResults=30&orderBy=${sortingBy}`
+        `https://www.googleapis.com/books/v1/volumes?q=${book}${category}&key=${key}&maxResults=30&orderBy=${sortingBy}`
       )
       .then((data) => {
-        console.log(data);
         if (+data.data.totalItems) {
           setBook(book);
           setTotalItems(+data.data.totalItems);
@@ -52,7 +52,7 @@ function App() {
     setLoading(true);
     axios
       .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${book}&key=${key}&maxResults=30&startIndex=${+books.length}&orderBy=${sortingBy}`
+        `https://www.googleapis.com/books/v1/volumes?q=${book}${category}&key=${key}&maxResults=30&startIndex=${+books.length}&orderBy=${sortingBy}`
       )
       .then((data) => {
         setBooks(books.concat(data.data.items));
@@ -64,9 +64,17 @@ function App() {
     setSortingBy(sort);
   }
 
+  function categoryBy(category: string) {
+    category === "all" ? setCategory("") : setCategory("+subject:" + category);
+  }
+
   return (
     <div className="App">
-      <Header handleSearch={handleSearch} sortBy={sortBy} />
+      <Header
+        handleSearch={handleSearch}
+        sortBy={sortBy}
+        categoryBy={categoryBy}
+      />
       <h1>Total items - {totalItems}</h1>
       <Content
         books={books}

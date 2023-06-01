@@ -9,6 +9,7 @@ import { optionsCategories, optionsSorting } from "./options";
 type HeaderProps = {
   handleSearch: (book: string) => void;
   sortBy: (sort: string) => void;
+  categoryBy: (category: string) => void;
 };
 
 export default function Header(props: HeaderProps) {
@@ -36,7 +37,7 @@ export default function Header(props: HeaderProps) {
       <div className="container">
         <div className="container__inner">
           <span className="Header__text">Categories</span>
-          <MySelect key="select1" options={optionsCategories} sortBy={props.sortBy} /> 
+          <MySelect key="select1" options={optionsCategories} sortBy={props.categoryBy} /> 
           {/*! change sort */}
         </div>
         <div className="container__inner">
